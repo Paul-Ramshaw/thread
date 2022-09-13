@@ -1,5 +1,5 @@
 import { IArticle as Props } from '../models/article';
-import { snippet, formatDate } from '../utils.ts/format';
+import { snippet, formatDate } from '../utils/format';
 import Vote from './Vote';
 
 interface IProps {
