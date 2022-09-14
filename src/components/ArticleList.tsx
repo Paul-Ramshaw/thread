@@ -23,7 +23,7 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div className="container mx-auto  lg:w-1/2">
+    <div className="container mx-auto lg:w-1/2">
       {articles.map((article) => {
         return <ArticleCard key={article.article_id} article={article} />;
       })}
