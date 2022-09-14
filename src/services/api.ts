@@ -17,3 +17,29 @@ export const retryPostComment = (
     }, 5000);
   });
 };
+
+const retryVote = (url: string, vote: number, retries: number) => {
+  if (!retries) {
+    return;
+  }
+
+  axios
+    .patch(url, {
+      inc_votes: vote,
+    })
+    .catch(() => {
+      setTimeout(() => {
+        retryVote(url, vote, retries - 1);
+      }, 5000);
+    });
+};
+
+export const voteOnArticle = (url: string, vote: number) => {
+  axios
+    .patch(url, {
+      inc_votes: vote,
+    })
+    .catch(() => {
+      retryVote(url, vote, 5);
+    });
+};
