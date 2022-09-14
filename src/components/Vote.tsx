@@ -10,9 +10,11 @@ interface IProps {
 
 const Vote: React.FC<IProps> = ({ article }) => {
   const [articleVotes, setArticleVotes] = useState(0);
+  const [votesLoading, setVotesLoading] = useState(true);
 
   useEffect(() => {
     setArticleVotes(article.votes);
+    setVotesLoading(false);
   }, [article]);
 
   const handleVote = (vote: number) => {
@@ -31,7 +33,7 @@ const Vote: React.FC<IProps> = ({ article }) => {
         icon={faArrowUp}
         onClick={() => handleVote(1)}
       />
-      {articleVotes ? <div className="w-7">{articleVotes}</div> : <></>}
+      {!votesLoading ? <div className="w-7">{articleVotes}</div> : <></>}
       <FontAwesomeIcon
         className="hover:cursor-pointer"
         icon={faArrowDown}
