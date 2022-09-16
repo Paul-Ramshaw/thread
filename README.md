@@ -4,7 +4,7 @@
 
 Thread is a social news aggregation, web content rating, and discussion website built with React, Typescript and Tailwindcss. The application has articles which are divided into topics. Each article has user ratings and can be voted on using the API. The app also allows users to discuss articles by adding comments in the discussion thread associated with each article.
 
-Try out a deployed version of the app here: https://ncode-news.netlify.app. To try the app locally follow the 'Getting started' instructions below.
+Try out a deployed version of the app here: https://thread-nc.netlify.app. To try the app locally follow the 'Getting started' instructions below.
 
 ## The API
 
