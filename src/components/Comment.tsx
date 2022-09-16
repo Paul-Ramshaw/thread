@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { formatDate } from '../utils/format';
 import UserContext from '../contexts/user';
-import axios from 'axios';
-// import retryDeleteComment from '../api/retryDeleteComment';
+import { deleteComment } from '../services/api';
 import { IComment } from '../models/comment';
 
 interface IProps {
@@ -30,11 +29,7 @@ const Comment = ({ comment, author, setComments }: IProps) => {
       }));
     });
 
-    const url = `https://northcoders-api-news.herokuapp.com/api/comments/${comment.comment_id}`;
-
-    axios.delete(url).catch((error) => {
-      //   retryDeleteComment(url, 5);
-    });
+    deleteComment(comment.comment_id);
   }
 
   let commentDetails = `${author} commented on ${commentDate}`;

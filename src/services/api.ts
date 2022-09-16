@@ -1,6 +1,7 @@
 import axios from 'axios';
+import sortByDate from '../utils/sort';
 
-export const baseURL = 'https://northcoders-api-news.herokuapp.com/api/';
+export const baseURL = 'https://northcoders-api-news.herokuapp.com/api';
 
 export const retryPostComment = (
   url: string,
@@ -18,7 +19,7 @@ export const retryPostComment = (
   });
 };
 
-const retryVote = (url: string, vote: number, retries: number) => {
+export const retryVote = (url: string, vote: number, retries: number) => {
   if (!retries) {
     return;
   }
@@ -34,6 +35,18 @@ const retryVote = (url: string, vote: number, retries: number) => {
     });
 };
 
+export const retryDeleteComment = (url: string, retries: number) => {
+  if (!retries) {
+    return;
+  }
+
+  axios.delete(url).catch(() => {
+    setTimeout(() => {
+      retryDeleteComment(url, retries - 1);
+    }, 5000);
+  });
+};
+
 export const voteOnArticle = (url: string, vote: number) => {
   axios
     .patch(url, {
@@ -42,4 +55,63 @@ export const voteOnArticle = (url: string, vote: number) => {
     .catch(() => {
       retryVote(url, vote, 5);
     });
+};
+
+export const getTopics = () => {
+  return axios
+    .get(`${baseURL}/topics`)
+    .then(({ data: { topics } }) => {
+      return topics;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getArticles = (params: any) => {
+  return axios
+    .get(baseURL + '/articles', { params })
+    .then(({ data: { articles } }) => {
+      return articles;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getArticle = (article_id: string | undefined) => {
+  return axios
+    .get(`${baseURL}/articles/${article_id}`)
+    .then(({ data: { article } }) => {
+      return article;
+    });
+};
+
+export const getComments = (article_id: number | string | undefined) => {
+  return axios
+    .get(`${baseURL}/articles/${article_id}/comments`)
+    .then(({ data: { comments } }) => {
+      return sortByDate(comments);
+    });
+};
+
+export const postComment = (article_id: any, comment: any) => {
+  const url = `${baseURL}/articles/${article_id}/comments`;
+  return axios.post(url, comment).then(() => {
+    axios
+      .get(url)
+      .then(({ data: { comments } }) => {
+        return comments;
+      })
+      .catch(() => {
+        retryPostComment(url, comment, 5);
+      });
+  });
+};
+
+export const deleteComment = (comment_id: number) => {
+  const url = `${baseURL}/comments/${comment_id}`;
+  axios.delete(url).catch((error) => {
+    retryDeleteComment(url, 5);
+  });
 };

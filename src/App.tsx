@@ -4,6 +4,7 @@ import Header from './components/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Message from './components/Message';
 import Article from './components/Article';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

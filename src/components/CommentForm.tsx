@@ -1,12 +1,10 @@
 import { useState, useContext } from 'react';
-import axios from 'axios';
 import UserContext from '../contexts/user';
-import { retryPostComment } from '../services/api';
-import sortByDate from '../utils/sort';
+import { postComment, getComments } from '../services/api';
 import { IComment } from '../models/comment';
 
 interface IProps {
-  article_id: number;
+  article_id: number | string;
   setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
 }
 
@@ -35,17 +33,13 @@ const CommentForm = ({ article_id, setComments }: IProps) => {
       body: currentComment,
     };
 
-    const url = `https://northcoders-api-news.herokuapp.com/api/articles/${article_id}/comments`;
-
-    axios
-      .post(url, commentToPost)
+    postComment(article_id, commentToPost)
       .then(() => {
-        axios.get(url).then(({ data: { comments } }) => {
-          setComments(sortByDate(comments));
+        getComments(article_id).then((data) => {
+          setComments(data);
         });
       })
-      .catch((error) => {
-        retryPostComment(url, commentToPost, 5);
+      .catch(() => {
         setPostErrMsg(
           "Your comment hasn't been saved yet, but we're going to try again later."
         );
@@ -102,7 +96,13 @@ const CommentForm = ({ article_id, setComments }: IProps) => {
           )}
         </div>
       </form>
-      {postErrMsg ? <div>{postErrMsg}</div> : <></>}
+      {postErrMsg ? (
+        <div className="border m-3 mb-10 p-1 bg-red-200 rounded text-sm">
+          {postErrMsg}
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

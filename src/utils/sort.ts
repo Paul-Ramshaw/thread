@@ -1,4 +1,4 @@
-export default function sortBytDate(arr: any) {
+export default function sortByDate(arr: any) {
   const newArr = [...arr];
 
   return newArr.sort((a, b) => {

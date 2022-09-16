@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# NC news
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Summary
 
-## Available Scripts
+Thread is a social news aggregation, web content rating, and discussion website built with React, Typescript and Tailwindcss. The application has articles which are divided into topics. Each article has user ratings and can be voted on using the API. The app also allows users to discuss articles by adding comments in the discussion thread associated with each article.
 
-In the project directory, you can run:
+Try out a deployed version of the app here: https://ncode-news.netlify.app. To try the app locally follow the 'Getting started' instructions below.
 
-### `npm start`
+## The API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Thread also makes use of the NC-news API. The Github repository for the API can be found here: https://github.com/Paul-Ramshaw/news.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To try out a deployed version of the API a good place to start is: https://northcoders-api-news.herokuapp.com/api. Here you can find details for each available endpoint.
 
-### `npm test`
+## Getting started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To run this application on your local machine, you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer. Then take the following steps:
 
-### `npm run build`
+1. Clone the repository to your local machine
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ git clone https://github.com/Paul-Ramshaw/thread.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Go into the repository
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+$ cd thread
+```
 
-### `npm run eject`
+3. Install all the required dependencies
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+$ npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the application on localhost
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+$ npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Dependencies
 
-## Learn More
+- [react](https://reactjs.org/)
+- [typescript](https://www.typescriptlang.org/)
+- [axios](https://github.com/axios/axios)
+- [react-router-dom](https://v5.reactrouter.com/web/guides/quick-start)
+- [tailwindcss](https://tailwindcss.com/)
+- [fontawesome](https://fontawesome.com/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## System Requirements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Node.js v18 or above<br>

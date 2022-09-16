@@ -27,7 +27,7 @@ const Vote: React.FC<IProps> = ({ article }) => {
   };
 
   return (
-    <div className="flex flex-col mr-1 mt-1 font-light text-xs">
+    <div className="flex flex-col mr-1 mt-1 font-light text-xs w-10">
       <FontAwesomeIcon
         className="hover:cursor-pointer"
         icon={faArrowUp}
@@ -35,7 +35,7 @@ const Vote: React.FC<IProps> = ({ article }) => {
       />
       {!votesLoading ? <div className="w-7">{articleVotes}</div> : <></>}
       <FontAwesomeIcon
-        className="hover:cursor-pointer"
+        className="cursor-pointer"
         icon={faArrowDown}
         onClick={() => handleVote(-1)}
       />

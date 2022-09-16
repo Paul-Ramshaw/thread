@@ -11,13 +11,13 @@ const ArticleCard: React.FC<IProps> = ({ article }) => {
   return (
     <div className="m-5 p-2 border-b flex">
       <Vote article={article} />
-      <div>
-        <div className="text-left font-light text-xs">
+      <div className="flex-grow">
+        <div className="text-left font-light text-xs text-slate-600">
           Created by {article.author} on {formatDate(article.created_at)}
         </div>
         <Link to={`/articles/${article.article_id}`}>
           <div className="text-left font-semibold mt-2">{article.title}</div>
-          <div className="text-left font-light text-sm mt-2">
+          <div className="text-left font-light text-sm mt-2 text-slate-600">
             {snippet(article.body)}
           </div>
         </Link>

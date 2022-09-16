@@ -1,24 +1,27 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { baseURL } from '../services/api';
+import { getArticle, getComments } from '../services/api';
 import { IArticle } from '../models/article';
 import Message from './Message';
 import Vote from './Vote';
 import { formatDate } from '../utils/format';
 import Comments from './Comments';
+import { IComment } from '../models/comment';
 
 const Article = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState<IArticle | null>(null);
+  const [comments, setComments] = useState<IComment[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(baseURL + 'articles/' + article_id)
-      .then(({ data: { article } }) => {
-        setArticle(article);
-        setIsLoading(false);
+    getArticle(article_id)
+      .then((data) => {
+        setArticle(data);
+        getComments(data.article_id).then((data) => {
+          setComments(data);
+          setIsLoading(false);
+        });
       })
       .catch((err) => {
         setIsLoading(false);
@@ -29,10 +32,10 @@ const Article = () => {
     return <Message message="Loading..." />;
   } else if (article !== null) {
     return (
-      <div className="container mx-auto lg:w-1/2">
+      <div className="container mx-auto lg:w-3/5 2xl:w-1/2">
         <div className="m-5 p-2 border-b flex">
           <Vote article={article} />
-          <div>
+          <div className="flex-grow">
             <div className="text-left font-light text-xs">
               Created by {article.author} on {formatDate(article.created_at)}
             </div>
@@ -45,7 +48,11 @@ const Article = () => {
             </div>
           </div>
         </div>
-        <Comments article={article} />
+        <Comments
+          article={article}
+          comments={comments}
+          setComments={setComments}
+        />
       </div>
     );
   } else {

@@ -1,34 +1,51 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import ArticleCard from './ArticleCard';
 import { IArticle } from '../models/article';
-import { baseURL } from '../services/api';
+import { ITopic } from '../models/topic';
+import { getArticles, getTopics } from '../services/api';
+import Topics from './Topics';
+import { useSearchParams } from 'react-router-dom';
+import SortSelect from './SortSelect';
+import Message from './Message';
 
 interface IState {
   articles: IArticle[];
+  topics: ITopic[];
 }
 
 const ArticleList = () => {
   const [articles, setArticles] = useState<IState['articles']>([]);
+  const [params] = useSearchParams();
+  const [isLoading, setLoading] = useState(true);
+  const [topics, setTopics] = useState<IState['topics']>([]);
 
   useEffect(() => {
-    axios
-      .get(baseURL + 'articles')
-      .then(({ data: { articles } }) => {
-        setArticles(articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getTopics().then((data) => setTopics(data));
   }, []);
 
-  return (
-    <div className="container mx-auto lg:w-1/2">
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
-      })}
-    </div>
-  );
+  useEffect(() => {
+    getArticles(params).then((data) => {
+      setArticles(data);
+      setLoading(false);
+    });
+  }, [params]);
+
+  if (isLoading) {
+    return <Message message="Loading..." />;
+  } else {
+    return (
+      <div>
+        <div className="container mx-auto xl:w-3/5 2xl:w-1/2 min-h-screen">
+          <Topics topics={topics} />
+          <SortSelect />
+          {articles.map((article) => {
+            return <ArticleCard key={article.article_id} article={article} />;
+          })}
+        </div>
+        <div></div>
+      </div>
+    );
+  }
 };
 
 export default ArticleList;
