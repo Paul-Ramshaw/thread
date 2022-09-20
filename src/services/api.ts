@@ -1,11 +1,12 @@
 import axios from 'axios';
 import sortByDate from '../utils/sort';
+import { IPostComment } from '../models/comment';
 
 export const baseURL = 'https://northcoders-api-news.herokuapp.com/api';
 
 export const retryPostComment = (
   url: string,
-  commentToPost: { username: string; body: string },
+  commentToPost: IPostComment,
   retries: number
 ) => {
   if (!retries) {
@@ -68,7 +69,7 @@ export const getTopics = () => {
     });
 };
 
-export const getArticles = (params: any) => {
+export const getArticles = (params: URLSearchParams) => {
   return axios
     .get(baseURL + '/articles', { params })
     .then(({ data: { articles } }) => {
@@ -79,7 +80,7 @@ export const getArticles = (params: any) => {
     });
 };
 
-export const getArticle = (article_id: string | undefined) => {
+export const getArticle = (article_id: number) => {
   return axios
     .get(`${baseURL}/articles/${article_id}`)
     .then(({ data: { article } }) => {
@@ -87,7 +88,7 @@ export const getArticle = (article_id: string | undefined) => {
     });
 };
 
-export const getComments = (article_id: number | string | undefined) => {
+export const getComments = (article_id: number) => {
   return axios
     .get(`${baseURL}/articles/${article_id}/comments`)
     .then(({ data: { comments } }) => {
@@ -95,7 +96,7 @@ export const getComments = (article_id: number | string | undefined) => {
     });
 };
 
-export const postComment = (article_id: any, comment: any) => {
+export const postComment = (article_id: number, comment: IPostComment) => {
   const url = `${baseURL}/articles/${article_id}/comments`;
   return axios.post(url, comment).then(() => {
     axios

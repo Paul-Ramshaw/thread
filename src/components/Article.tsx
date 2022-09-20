@@ -15,7 +15,7 @@ const Article = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getArticle(article_id)
+    getArticle(Number(article_id))
       .then((data) => {
         setArticle(data);
         getComments(data.article_id).then((data) => {

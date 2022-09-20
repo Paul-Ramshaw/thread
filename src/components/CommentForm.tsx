@@ -4,7 +4,7 @@ import { postComment, getComments } from '../services/api';
 import { IComment } from '../models/comment';
 
 interface IProps {
-  article_id: number | string;
+  article_id: number;
   setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
 }
 

@@ -6,7 +6,6 @@ interface IState {
 }
 
 const Topics = ({ topics }: IState) => {
-  // const [topics, setTopics] = useState<IState['topics']>([]);
   const [params, setParams] = useSearchParams();
 
   const handleClick = (topic: string) => {

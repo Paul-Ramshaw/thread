@@ -3,7 +3,12 @@ export interface IComment {
   body: string;
   vote?: 0;
   author: string;
-  article_id: number | string;
+  article_id: number;
   created_at?: string;
   justSubmitted?: boolean;
+}
+
+export interface IPostComment {
+  username: string;
+  body: string;
 }
