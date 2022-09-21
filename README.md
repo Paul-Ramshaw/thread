@@ -1,4 +1,4 @@
-# NC news
+# thread
 
 ## Project Summary
 
