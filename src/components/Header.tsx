@@ -1,5 +1,5 @@
-import thread from '../assets/thread.webp';
 import { Link } from 'react-router-dom';
+import thread from '../assets/thread.webp';
 
 const Header = () => {
   return (

@@ -1,11 +1,11 @@
-import { ITopic } from '../models/topic';
 import { useSearchParams } from 'react-router-dom';
+import { ITopic } from '../models/topic';
 
-interface IState {
+interface IProps {
   topics: ITopic[];
 }
 
-const Topics = ({ topics }: IState) => {
+const Topics: React.FC<IProps> = ({ topics }) => {
   const [params, setParams] = useSearchParams();
 
   const handleClick = (topic: string) => {

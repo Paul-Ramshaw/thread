@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getArticles, getTopics } from '../services/api';
+import Message from './Message';
+import Topics from './Topics';
+import SortSelect from './SortSelect';
 import ArticleCard from './ArticleCard';
 import { IArticle } from '../models/article';
 import { ITopic } from '../models/topic';
-import { getArticles, getTopics } from '../services/api';
-import Topics from './Topics';
-import { useSearchParams } from 'react-router-dom';
-import SortSelect from './SortSelect';
-import Message from './Message';
 
 interface IState {
   articles: IArticle[];

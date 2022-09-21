@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { getArticle, getComments } from '../services/api';
-import { IArticle } from '../models/article';
 import Message from './Message';
 import Vote from './Vote';
-import { formatDate } from '../utils/format';
 import Comments from './Comments';
+import { formatDate } from '../utils/format';
+import { IArticle } from '../models/article';
 import { IComment } from '../models/comment';
 
 const Article = () => {

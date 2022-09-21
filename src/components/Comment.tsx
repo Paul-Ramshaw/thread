@@ -10,7 +10,7 @@ interface IProps {
   setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
 }
 
-const Comment = ({ comment, author, setComments }: IProps) => {
+const Comment: React.FC<IProps> = ({ comment, author, setComments }) => {
   const [commentDate, setCommentDate] = useState('');
   const user = useContext(UserContext);
 

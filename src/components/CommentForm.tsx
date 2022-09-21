@@ -8,7 +8,7 @@ interface IProps {
   setComments: React.Dispatch<React.SetStateAction<IComment[]>>;
 }
 
-const CommentForm = ({ article_id, setComments }: IProps) => {
+const CommentForm: React.FC<IProps> = ({ article_id, setComments }) => {
   const [currentComment, setCurrentComment] = useState('');
   const [postErrMsg, setPostErrMsg] = useState('');
   const user = useContext(UserContext);

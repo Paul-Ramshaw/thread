@@ -48,7 +48,8 @@ export const retryDeleteComment = (url: string, retries: number) => {
   });
 };
 
-export const voteOnArticle = (url: string, vote: number) => {
+export const voteOnArticle = (article_id: number, vote: number) => {
+  const url = `${baseURL}/articles/${article_id}/${article_id}`;
   axios
     .patch(url, {
       inc_votes: vote,
